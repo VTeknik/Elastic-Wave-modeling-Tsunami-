@@ -1,90 +1,95 @@
-# Elastic Wave Propagation Simulation using Nonlinear Wave Modeling
+# Elastic Wave Modeling: Tsunami Simulation
 
-## Overview
-This repository provides a Fortran-based code structure for simulating elastic wave propagation using nonlinear wave modeling techniques. The code is designed with flexibility and scalability in mind, allowing users to model wave propagation scenarios with multiple sources, custom source insertion at different locations and times, and user-defined boundary conditions.
+This repository contains a Fortran-based code structure for simulating elastic wave propagation using nonlinear wave modeling. The code is designed with flexibility in mind, allowing for multiple sources, user-defined boundary conditions, and the ability to insert sources at different locations and times. This framework is particularly suited for applications such as tsunami modeling and other geophysical wave simulations.
 
 ## Features
-- **Nonlinear Wave Modeling**: Simulates complex elastic wave behaviors in nonlinear media.
-- **Multiple Source Support**: Add multiple wave sources to the simulation.
-- **Custom Source Insertion**: Define specific locations and times for each source.
-- **User-Defined Boundary Conditions**: Tailor the simulation boundaries to match your experimental or theoretical setup.
-- **Efficient and Modular Codebase**: The code is structured for easy customization and scalability.
 
-## Prerequisites
-- Fortran compiler (e.g., `gfortran`, `ifort`, etc.)
-- A compatible build system, such as `make`
-- Basic knowledge of Fortran and numerical modeling techniques
+- **Elastic Wave Propagation**: Simulates the propagation of elastic waves in 2D and 3D environments.
+- **Nonlinear Wave Modeling**: Incorporates nonlinear effects to capture realistic wave behavior.
+- **Multiple Sources**: Supports multiple wave sources with customizable positions and timing.
+- **User-Defined Boundary Conditions**: Allows users to specify boundary conditions according to their requirements.
+- **Modular Structure**: Organized into separate files for better readability and maintainability.
 
-## Installation
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/username/elastic-wave-simulation.git
-    cd elastic-wave-simulation
-    ```
-2. Compile the code using the provided `Makefile`:
-    ```bash
-    make
-    ```
-3. Ensure the executable file (`wave_simulation.out`) is created in the root directory.
+---
 
-## Usage
-### Input Files
-- **`input_parameters.dat`**: Defines simulation parameters such as grid size, time step, material properties, and boundary conditions.
-- **`source_data.dat`**: Specifies the number, locations, and activation times of wave sources.
+## Repository Structure
 
-### Running the Simulation
-Run the compiled executable:
+### Files
+
+- **`BathtubModel.m`**: A MATLAB script used for post-processing or visualization of simulation results.
+- **`Geo11.f`**: A Fortran module containing geophysical parameter definitions and wave propagation algorithms.
+- **`Separate.f`**: A Fortran module dedicated to source separation and integration routines.
+- **`README.md`**: This file, providing an overview of the repository and usage instructions.
+
+---
+
+## Requirements
+
+- **Fortran Compiler**: The code has been tested with GNU Fortran (gfortran) but should work with any modern Fortran compiler.
+- **MATLAB**: For visualization and post-processing using the provided `BathtubModel.m` script.
+- **Operating System**: Linux, macOS, or Windows with a compatible Fortran compiler.
+
+---
+
+## Usage Instructions
+
+### 1. Clone the Repository
 ```bash
-./wave_simulation.out
+git clone https://github.com/VTeknik/Elastic-Wave-modeling-Tsunami-.git
+cd Elastic-Wave-modeling-Tsunami-
 ```
 
-### Output Files
-The simulation generates output files for analysis:
-- **`wavefield_data_*.dat`**: Snapshots of the wavefield at specified time intervals.
-- **`boundary_condition_logs.dat`**: Logs of the applied boundary conditions.
+### 2. Compile the Fortran Code
+Compile the Fortran source files using a Fortran compiler:
+```bash
+gfortran -o elastic_wave Geo11.f Separate.f
+```
 
-## Code Structure
-- **`main.f90`**: Entry point of the program.
-- **`modules/`**: Contains reusable modules for numerical methods, material properties, and boundary conditions.
-- **`sources/`**: Handles the source terms for wave excitation.
-- **`boundaries/`**: Implements user-defined boundary conditions.
-- **`output/`**: Contains routines for writing simulation results to files.
+### 3. Run the Simulation
+Execute the compiled program:
+```bash
+./elastic_wave
+```
+Follow the prompts to input simulation parameters or modify the source files directly for custom configurations.
+
+### 4. Post-Process Results
+Use the MATLAB script `BathtubModel.m` to visualize the results:
+```matlab
+run('BathtubModel.m')
+```
+
+---
 
 ## Customization
-### Adding New Boundary Conditions
-1. Open `boundaries/user_defined_boundary.f90`.
-2. Implement the desired boundary condition in the provided template.
-3. Recompile the code using `make`.
 
-### Modifying Source Configurations
-Edit `source_data.dat` to specify custom source locations and activation times. The format is as follows:
-```
-Number_of_sources
-Source_X Source_Y Activation_Time Amplitude
-...
-```
+1. **Defining Sources**: Edit the `Separate.f` file to define multiple sources and specify their locations and timing.
+2. **Boundary Conditions**: Modify `Geo11.f` to implement custom boundary conditions.
+3. **Simulation Parameters**: Adjust the physical and numerical parameters in the `Geo11.f` file to suit your simulation needs.
+
+---
 
 ## Example
-An example setup is provided in the `examples/` directory. Run it using:
-```bash
-cp examples/input_parameters_example.dat input_parameters.dat
-cp examples/source_data_example.dat source_data.dat
-./wave_simulation.out
-```
+
+A sample configuration is provided in the default setup. Run the simulation to observe elastic wave propagation from multiple sources with predefined boundary conditions.
+
+---
 
 ## Contributing
+
 Contributions are welcome! Please follow these steps:
 1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Submit a pull request with a detailed description of the changes.
+2. Create a new branch for your feature or bugfix.
+3. Submit a pull request with a detailed explanation of your changes.
+
+---
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+---
 
 ## Contact
-For questions or issues, please contact:
-- **Name**: Vahid Teknik
-- **Email**: [vahid.teknik@gmail.com](mailto:vahid.teknik@gmail.com)
 
-Enjoy simulating elastic wave propagation!
+For questions or issues, please contact [Vahid Teknik](mailto:vahid.teknik@gmail.com).
 
